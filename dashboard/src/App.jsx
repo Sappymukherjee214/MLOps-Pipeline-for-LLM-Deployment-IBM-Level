@@ -26,7 +26,8 @@ import {
   Bar
 } from 'recharts';
 
-const API_BASE_URL = 'http://localhost:8000/api/v1';
+const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:8000';
+const API_BASE_URL = `${BASE_URL}/api/v1`;
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -68,7 +69,7 @@ const App = () => {
 
   const fetchHealth = async () => {
     try {
-      const res = await axios.get('http://localhost:8000/health');
+      const res = await axios.get(`${BASE_URL}/health`);
       setHealth(res.data);
     } catch (e) {
       console.error("Health fetch failed", e);
